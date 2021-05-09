@@ -42,37 +42,36 @@
 
 
     /*
-        // create groups
+    // create groups
 
-        var numberOfGroups = 25;
-        var groups = new vis.DataSet()
-        for (var i = 0; i < numberOfGroups; i++) {
-            groups.add({
-                id: i,
-                content: 'Truck ' + i
-            })
-        }
+    var numberOfGroups = 25;
+    var groups = new vis.DataSet()
+    for (var i = 0; i < numberOfGroups; i++) {
+        groups.add({
+            id: i,
+            content: 'Truck ' + i
+        })
+    }
 
-
-
-      window.items = new vis.DataSet();
-      var itemsPerGroup = Math.round(numberOfItems / numberOfGroups);
-      for (var truck = 0; truck < numberOfGroups; truck++) {
-          var date = new Date();
-          for (var order = 0; order < itemsPerGroup; order++) {
-              date.setHours(date.getHours() + 4 * (Math.random() < 0.2));
-              var start = new Date(date);
-              date.setHours(date.getHours() + 2 + Math.floor(Math.random() * 4));
-              var end = new Date(date);
-              items.add({
-                  id: order + itemsPerGroup * truck,
-                  group: truck,
-                  start: start,
-                  end: end,
-                  content: 'Order ' + order
-              });
-          }
-      }*/
+    window.items = new vis.DataSet();
+    var itemsPerGroup = Math.round(numberOfItems / numberOfGroups);
+    for (var truck = 0; truck < numberOfGroups; truck++) {
+      var date = new Date();
+      for (var order = 0; order < itemsPerGroup; order++) {
+          date.setHours(date.getHours() + 4 * (Math.random() < 0.2));
+          var start = new Date(date);
+          date.setHours(date.getHours() + 2 + Math.floor(Math.random() * 4));
+          var end = new Date(date);
+          items.add({
+              id: order + itemsPerGroup * truck,
+              group: truck,
+              start: start,
+              end: end,
+              content: 'Order ' + order
+          });
+      }
+    }
+    */
 
     var GroupTemplate = (group) => {
         return <div>
@@ -200,8 +199,8 @@
 
         render() {
             return <div>
-                <h1>timline with React</h1>
-                <h2>Using react components for items and group templates</h2>
+                <h1>تایم لاین فارسی و شمسی</h1>
+                <h2>با استفاده از ری اکت بصورت استاتیک</h2>
 
                 <div id="visualization"></div>
             </div>
