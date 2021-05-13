@@ -7,12 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Timeline Farsi</title>
 
-    <link href="/assets/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css"/>
     <link href="/assets/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
 
-<main style="padding: 5rem">
+<main style="padding: 2rem 5rem">
     <div id='root'></div>
 </main>
 
@@ -26,7 +27,6 @@
 <script src="/assets/moment-jalaali.js"></script>
 <script src="/assets/vis-timeline-graph2d.min.js"></script>
 <script type="text/babel">
-
     moment.loadPersian({
         dialect: 'persian-modern',
         usePersianDigits: true
@@ -148,7 +148,6 @@
             }
         }
     };
-
 
     // specify options
     var options = {
