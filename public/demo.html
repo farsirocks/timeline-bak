@@ -40,7 +40,9 @@
         {id: 3, content: 'ابتدایی', start: '2021-01-21'},
         {id: 4, content: 'نگارش کتاب', start: '2021-01-22', end: '2021-01-26'},
         {id: 5, content: 'جایزه اسکار', start: '2021-01-27', type: 'point'},
-        {id: 6, content: 'مرگ', start: '2021-01-30'}
+        {id: 6, content: 'مرگ', start: '2021-01-30'},
+        {id: 7, content: 'آزمایشی', start: '2041-01-30'}
+
     ]);
 
 
@@ -109,10 +111,19 @@
             </div>
         }
     }
-
+    function getStartDate()
+    {
+        //todo: dynamic, read from data
+        return '2021-01-1'
+    }
+    function getEndDate()
+    {
+        //todo: dynamic, read from data
+        return '2021-02-10'
+    }
     var persian_options = {
-        start: '2021-01-10',
-        end: '2021-02-10',
+        start: getStartDate(),
+        end: getEndDate(),
         height: '300px',
         locales: {
             fa: {
