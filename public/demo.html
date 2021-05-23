@@ -26,7 +26,10 @@
 <script src="/assets/fa.js"></script>
 <script src="/assets/moment-jalaali.js"></script>
 <script src="/assets/vis-timeline-graph2d.min.js"></script>
+<script src="/assets/dataset.js"></script>
 <script type="text/babel">
+
+
     moment.loadPersian({
         dialect: 'persian-modern',
         usePersianDigits: true
@@ -34,17 +37,12 @@
 
 
     window.items = new vis.DataSet();
-    items.add([
-        {id: 1, content: 'تولد', start: '2021-01-18'},
-        {id: 2, content: 'مهد کودک', start: '2021-01-20'},
-        {id: 3, content: 'ابتدایی', start: '2021-01-21'},
-        {id: 4, content: 'نگارش کتاب', start: '2021-01-22', end: '2021-01-26'},
-        {id: 5, content: 'جایزه اسکار', start: '2021-01-27', type: 'point'},
-        {id: 6, content: 'مرگ', start: '2021-01-30'},
-        {id: 7, content: 'آزمایشی', start: '2041-01-30'}
+    items.add(getDataset());
 
-    ]);
 
+    // items.forEach(function (item) {
+    //    console.log(item)
+    // });
 
     /*
     // create groups
@@ -111,16 +109,7 @@
             </div>
         }
     }
-    function getStartDate()
-    {
-        //todo: dynamic, read from data
-        return '2021-01-1'
-    }
-    function getEndDate()
-    {
-        //todo: dynamic, read from data
-        return '2021-02-10'
-    }
+
     var persian_options = {
         start: getStartDate(),
         end: getEndDate(),
