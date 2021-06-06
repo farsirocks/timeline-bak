@@ -40,77 +40,7 @@
     items.add(getDataset());
 
 
-    // items.forEach(function (item) {
-    //    console.log(item)
-    // });
-
-    /*
-    // create groups
-
-    var numberOfGroups = 25;
-    var groups = new vis.DataSet()
-    for (var i = 0; i < numberOfGroups; i++) {
-        groups.add({
-            id: i,
-            content: 'Truck ' + i
-        })
-    }
-
-    window.items = new vis.DataSet();
-    var itemsPerGroup = Math.round(numberOfItems / numberOfGroups);
-    for (var truck = 0; truck < numberOfGroups; truck++) {
-      var date = new Date();
-      for (var order = 0; order < itemsPerGroup; order++) {
-          date.setHours(date.getHours() + 4 * (Math.random() < 0.2));
-          var start = new Date(date);
-          date.setHours(date.getHours() + 2 + Math.floor(Math.random() * 4));
-          var end = new Date(date);
-          items.add({
-              id: order + itemsPerGroup * truck,
-              group: truck,
-              start: start,
-              end: end,
-              content: 'Order ' + order
-          });
-      }
-    }
-    */
-
-    var GroupTemplate = (group) => {
-        return <div>
-            <label>{group.content}</label>
-        </div>
-    }
-
-    class ItemTemplate extends React.Component {
-        constructor(props) {
-            super(props);
-        }
-
-        render() {
-            return <div>
-                <label>{this.props.item.content}</label>
-            </div>
-        }
-    }
-
-    class VisibleFramTemplate extends React.Component {
-        constructor(props) {
-            super(props);
-        }
-
-        render() {
-            return <div>
-                id: {this.props.item.id}
-                <button onClick={() => {
-                    return console.log('aaaaaa')
-                }}>aaaa
-                </button>
-            </div>
-        }
-    }
-
-    var persian_options = {
+    var options = {
         start: getStartDate(),
         end: getEndDate(),
         height: '300px',
@@ -123,7 +53,8 @@
         },
         locale: 'fa',
         rtl: true,
-
+        orientation: 'top',
+        editable: true,
         // min: new Date(2018, 0, 1),
         // max: new Date(2019, 0, 1),
         // zoomMin: 1000 * 27 * 24 * 24, // if you want to zoom more in then lower the 27
@@ -155,50 +86,6 @@
         }
     };
 
-    // specify options
-    var options = {
-        orientation: 'top',
-        start: new Date(),
-        end: new Date(1000 * 60 * 60 * 24 + (new Date()).valueOf()),
-        editable: true,
-        onInitialDrawComplete: () => {
-            window.timeline.setItems(window.items)
-        },
-        template: function (item, element) {
-            if (!item) {
-                return
-            }
-
-            return ReactDOM.createPortal(ReactDOM.render(<ItemTemplate item={item}/>, element), element, () => {
-                window.timeline.redraw()
-            });
-
-            // Works too
-            // return ReactDOMServer.renderToString(<ItemTemplate item={item} />)
-
-            // Kinda works
-            // ReactDOM.render(<ItemTemplate item={item} />, element );
-            // return ''
-        },
-
-        groupTemplate: function (group, element) {
-            if (!group || !group.content) {
-                return
-            }
-            return ReactDOM.createPortal(ReactDOM.render(<GroupTemplate group={group}/>, element), element);
-        },
-
-        visibleFrameTemplate: function (item, element) {
-            if (!item || !element) {
-                return
-            }
-            if (element.className.indexOf('timeline-item-visible-frame') === -1) {
-                return
-            }
-            return ReactDOM.createPortal(ReactDOM.render(<VisibleFramTemplate item={item}/>, element), element);
-
-        },
-    }
 
     class Timeline extends React.Component {
         componentDidMount() {
@@ -217,7 +104,7 @@
 
     function initTimeline() {
         var container = document.getElementById('visualization');
-        window.timeline = new vis.Timeline(container, items, {...options, ...persian_options});
+        window.timeline = new vis.Timeline(container, items, options);
     }
 
     ReactDOM.render(<Timeline/>, document.getElementById('root'));

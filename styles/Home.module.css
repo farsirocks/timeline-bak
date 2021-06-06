@@ -8,6 +8,12 @@
   height: 100vh;
 }
 
+.timeline-container{
+  display: none;
+  width: 1200px !important;
+  max-width: 100%;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;
