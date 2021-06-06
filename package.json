@@ -8,13 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "jalali-moment": "^3.3.10",
     "keycharm": "^0.4.0",
     "moment": "^2.29.1",
-    "next": "10.2.0",
+    "next": "^10.2.3",
     "propagating-hammerjs": "^2.0.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-vis-timeline": "^2.0.3",
+    "react": "^17",
+    "react-dom": "^17",
+    "vis": "^4.21.0-EOL",
     "vis-data": "^7.1.2",
     "vis-timeline": "^7.4.8",
     "vis-util": "^5.0.2",
