@@ -1,71 +1,86 @@
 import Timeline from '../Modules/Timeline/timeline'
 import styles from '../styles/Home.module.css'
 import TimeLineConfig from '../Modules/TimeLineConfig'
-import React, {Component} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import moment from 'moment'
 
-class App extends Component {
-    timelineRef = React.createRef();
-    timeLineConfig = new TimeLineConfig(this.timelineRef);
+function App() {
 
-    constructor(props) {
-        super(props);
+    const [locale, setLocale] = useState('en');
+    const [selectedIds, setSelectedIds] = useState([]);
+    const timelineRef = useRef(null);
+    let timeLineConfig = null;
+    useEffect(()=>{
+        if (timelineRef.current)
+        {
+            timeLineConfig = new TimeLineConfig(timelineRef);
+            timeLineConfig.setLocale(locale);
+        }
+    },[timelineRef])
 
-        this.state = {
-            selectedIds: [],
-            locale: 'en'
-        };
-    }
 
-    onAddItem = () => {
-        var nextId = this.timelineRef.current.items.length + 1;
-        this.timelineRef.current.items.add(this.timeLineConfig.addItem(nextId, 3, 'test', moment()));
-        this.timelineRef.current.timeline.fit();
+
+    // constructor(props) {
+    //     super(props);
+
+    //     state = {
+    //         selectedIds: [],
+    //         locale: 'en'
+    //     };
+    // }
+
+    const onAddItem = () => {
+        let nextId = timelineRef.current.items.length + 1;
+        timelineRef.current.items.add(timeLineConfig.addItem(nextId, 3, 'test', moment()));
+        timelineRef.current.timeline.fit();
     };
 
-    onFit = () => {
-        this.timelineRef.current.timeline.fit();
+    const onFit = () => {
+        timelineRef.current.timeline.fit();
     };
 
 
-    selectLocale = (event) => {
-        this.setState({locale: event.target.value});
-        this.timeLineConfig.setLocale(event.target.value)
-    };
+    // selectLocale = (event) => {
+    //     setState({locale: event.target.value});
+    //     timeLineConfig.setLocale(event.target.value)
+    // };
 
-    render() {
-
-        return (
-            <div className="App">
-                <p className="header">This example demonstrate using groups.</p>
-                <div className="timeline-container">
-                    <Timeline
-                        ref={this.timelineRef}
-                        {...this.timeLineConfig.getProps()}
-                        clickHandler={this.clickHandler}
-                        selection={this.state.selectedIds}
-                    />
-                </div>
-                <br/>
-                <button onClick={this.onAddItem}>Add Item</button>
-                <button onClick={this.onFit}>Fit Screen</button>
-
-                <select id="locale" onChange={this.selectLocale} value={this.state.locale}>
-                    <option value="fa">Farsi</option>
-                    <option value="en">English</option>
-                </select>
-            </div>
-        );
-    }
-
-    clickHandler = () => {
-        const {group} = this.props;
-        var items = this.timelineRef.current.items.get();
+    const clickHandler = () => {
+        const { group } = props;
+        var items = timelineRef.current.items.get();
         const selectedIds = items.filter(item => item.group === group).map(item => item.id);
-        this.setState({
+        setState({
             selectedIds
         });
     };
+
+    // if (!timeLineConfig)
+    //     return <div>Loading.. </div>
+    // else
+    return (
+
+        <div className="App">
+            <p className="header">This example demonstrate using groups.</p>
+            <div className="timeline-container">
+                <Timeline
+                    ref={timelineRef}
+                    {...timeLineConfig.getProps()}
+                    clickHandler={clickHandler}
+                    selection={selectedIds}
+                />
+            </div>
+            <br />
+            <button onClick={onAddItem}>Add Item</button>
+            <button onClick={onFit}>Fit Screen</button>
+
+            {/* <select id="locale" onChange={locale} value={locale}>
+                <option value="fa">Farsi</option>
+                <option value="en">English</option>
+            </select> */}
+        </div>
+    );
+
+
 }
 
 export default App;
